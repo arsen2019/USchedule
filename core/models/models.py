@@ -11,13 +11,12 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.orm import relationship, sessionmaker, declarative_base
-
-Base = declarative_base()
+from core.models.base import Base
 
 
 class Student(Base):
 
-    __tablename__ = "student"
+    # __tablename__ = "student"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
@@ -33,13 +32,13 @@ class Student(Base):
 
 
 class Group(Base):
-    __tablename__ = "group"
+    # __tablename__ = "group"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     name = Column(String, nullable=False)
     major_uuid = Column(UUID(as_uuid=True), ForeignKey("major.uuid"))
 
-    major = relationship("Major", backref="Group")
-    student = relationship("Student", backref="Group")
+    # major = relationship("major", backref="group")
+    # student = relationship("student", backref="group")
 
     def __init__(self, name, major_uuid):
         self.uuid = uuid4()
@@ -48,7 +47,6 @@ class Group(Base):
 
 
 class Course(Base):
-    __tablename__ = "course"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     name = Column(String, nullable=False)
     room_uuid = Column(UUID(as_uuid=True), ForeignKey("room.uuid"))
@@ -57,10 +55,11 @@ class Course(Base):
     group_uuid = Column(UUID(as_uuid=True), ForeignKey("group.uuid"))
     day_of_week = Column(String, nullable=False)
     is_odd = Column(Boolean, nullable=False)
+    is_lecture = Column(Boolean, nullable=False)
     start_time = Column(String, nullable=False)
     end_time = Column(String, nullable=False)
-
-    group = relationship("Group", backref="Course")
+    #
+    # group = relationship("group", backref="course")
 
     def __init__(
         self,
@@ -71,6 +70,7 @@ class Course(Base):
         group_uuid,
         day_of_week,
         is_odd,
+        is_lecture,
         start_time,
         end_time,
     ):
@@ -82,12 +82,12 @@ class Course(Base):
         self.group_uuid = group_uuid
         self.day_of_week = day_of_week
         self.is_odd = is_odd
+        self.is_lecture = is_lecture
         self.start_time = start_time
         self.end_time = end_time
 
 
 class Major(Base):
-    __tablename__ = "major"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     name = Column(String, nullable=False)
 
@@ -97,7 +97,6 @@ class Major(Base):
 
 
 class Room(Base):
-    __tablename__ = "room"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     building_uuid = Column(UUID(as_uuid=True), ForeignKey("building.uuid"))
     name = Column(String, nullable=False)
@@ -109,7 +108,6 @@ class Room(Base):
 
 
 class Teacher(Base):
-    __tablename__ = "teacher"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
@@ -123,7 +121,6 @@ class Teacher(Base):
 
 
 class Building(Base):
-    __tablename__ = "building"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     country = Column(String, nullable=False)
     city = Column(String, nullable=False)
@@ -141,7 +138,6 @@ class Building(Base):
 
 
 class Department(Base):
-    __tablename__ = "department"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     room_uuid = Column(UUID(as_uuid=True), ForeignKey("room.uuid"))
     building_uuid = Column(UUID(as_uuid=True), ForeignKey("building.uuid"))
