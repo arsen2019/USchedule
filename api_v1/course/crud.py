@@ -1,28 +1,15 @@
 from fastapi import HTTPException
-from sqlalchemy import select
+from sqlalchemy import select, or_
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
-from core.models import Course, Group
+from core.models import Course
+from datetime import datetime
 
 
-async def get_courses(session: AsyncSession) -> list[Course]:
-    stmt = select(Course).order_by(Course.uuid)
-    result: Result = await session.execute(stmt)
-    courses = result.scalars().all()
-    if courses is None:
-        return []
-    return list(courses)
-
-
-async def get_courses_by_group_number(group_name: str, session: AsyncSession):
-    stmt = select(Group).where(Group.name == group_name)
-    group_result: Result = await session.execute(stmt)
-    group = group_result.scalars().first()
-
-    if not group:
-        raise HTTPException(status_code=404, detail="Group not found")
-
-    stmt = select(Course).where(Course.group_uuid == group.uuid)
+async def get_courses(
+    group_uuid, session: AsyncSession, current_week: datetime = datetime.now()
+) -> list[Course]:
+    stmt = select(Course).where(or_(Course.group_uuid == group_uuid, Course.is_lecture))
     result: Result = await session.execute(stmt)
     courses = result.scalars().all()
 
@@ -30,5 +17,26 @@ async def get_courses_by_group_number(group_name: str, session: AsyncSession):
         raise HTTPException(
             status_code=404, detail="No courses found for the specified group"
         )
+    day_order = {
+        "Monday": 1,
+        "Tuesday": 2,
+        "Wednesday": 3,
+        "Thursday": 4,
+        "Friday": 5,
+    }
 
-    return courses
+    current_week_number = current_week.isocalendar()[1]
+    is_current_week_odd = current_week_number % 2 == 1
+
+    filtered_courses = [
+        course for course in courses if course.is_odd == is_current_week_odd
+    ]
+
+    sorted_courses = sorted(
+        filtered_courses,
+        key=lambda course: (
+            day_order[course.day_of_week],
+            datetime.strptime(course.start_time, "%H:%M"),
+        ),
+    )
+    return sorted_courses
