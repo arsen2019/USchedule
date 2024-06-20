@@ -1,18 +1,28 @@
 from fastapi import HTTPException
 from sqlalchemy import select, or_
+from sqlalchemy.orm import selectinload
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
-from core.models import Course
+from core.models import Course, Teacher, Room
 from datetime import datetime
 
 
 async def get_courses(
     group_uuid, session: AsyncSession, current_week: datetime = datetime.now()
 ) -> list[Course]:
-    stmt = select(Course).where(or_(Course.group_uuid == group_uuid, Course.is_lecture))
-    result: Result = await session.execute(stmt)
-    courses = result.scalars().all()
+    stmt = (
+        select(Course)
+        .options(
+            selectinload(Course.teacher),
+            selectinload(Course.room),
+            selectinload(Course.building),
+        )
+        .filter((Course.group_uuid == group_uuid) | Course.is_lecture)
+    )
 
+    result = await session.execute(stmt)
+    courses = result.scalars().all()
+    courses
     if not courses:
         raise HTTPException(
             status_code=404, detail="No courses found for the specified group"
@@ -26,7 +36,7 @@ async def get_courses(
     }
 
     current_week_number = current_week.isocalendar()[1]
-    is_current_week_odd = current_week_number % 2 == 1
+    is_current_week_odd = current_week_number % 2 == 0
 
     filtered_courses = [
         course for course in courses if course.is_odd == is_current_week_odd

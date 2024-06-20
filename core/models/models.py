@@ -59,7 +59,9 @@ class Course(Base):
     start_time = Column(String, nullable=False)
     end_time = Column(String, nullable=False)
     #
-    # group = relationship("group", backref="course")
+    teacher = relationship("Teacher")
+    room = relationship("Room")
+    building = relationship("Building")
 
     def __init__(
         self,
