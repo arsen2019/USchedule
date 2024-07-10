@@ -6,8 +6,6 @@ services:
     repo: https://github.com/arsen2019/USchedule.git
     branch: main # or the branch where your code is located
     dockerfilePath: ./Schedule/Dockerfile
-    buildCommand: "poetry install"
-    startCommand: "poetry run uvicorn main:app --host 0.0.0.0 --port 8000"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -18,16 +16,7 @@ services:
     name: uschedule-frontend
     plan: free
     env: docker
-    repo: https://github.com/arsen2019/USchedule.git
+    repo: https://github.com/arsen2019/USchedule_UI.git
     branch: master # or the branch where your code is located
     dockerfilePath: ./uschedule-ui/Dockerfile
-    buildCommand: "npm install"
-    startCommand: "npm start"
 
-databases:
-  - type: postgres
-    name: uschedule-db
-    plan: free
-    starterDbName: postgres
-    starterDbUser: postgres
-    starterDbPassword: Postgresql123!
