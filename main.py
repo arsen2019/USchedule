@@ -8,8 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
+    "http://104.248.138.102:3000",
+    "http://104.248.138.102:8000",
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:3000",
