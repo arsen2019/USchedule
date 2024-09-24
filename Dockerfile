@@ -17,4 +17,4 @@ COPY backup.sql /docker-entrypoint-initdb.d/
 
 
 RUN apt-get update && apt-get install -y postgresql-client
-CMD ["sh", "-c", "PGPASSWORD=Postgresql123! psql -U postgres -h db -d postgres /docker-entrypoint-initdb.d/backup.sql && uvicorn main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "PGPASSWORD=Postgresql123! psql -U postgres -h db -d postgres  /docker-entrypoint-initdb.d/backup.sql && uvicorn main:app --host 0.0.0.0 --port 8000"]

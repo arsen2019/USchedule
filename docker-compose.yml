@@ -38,9 +38,21 @@ services:
         condition: service_healthy
     networks:
       - uschedule-net
+      - traefik
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.schedule.arsgreg.com`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls=true"
+      - "traefik.http.routers.backend.tls.certresolver=myresolver"
+
+
 
 
 networks:
+  traefik:
+    external: true
   uschedule-net:
     driver: bridge
 volumes:
