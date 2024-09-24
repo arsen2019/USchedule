@@ -8,20 +8,18 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 origins = [
-    "http://104.248.138.102:3000",
-    "http://104.248.138.102:8000",
+    "https://schedule.arsgreg.com",
+    "https://schedule.arsgreg.com:1",
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:3000",
 ]
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     async with db_helper.engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     yield
-
 
 app = FastAPI(lifespan=lifespan)
 

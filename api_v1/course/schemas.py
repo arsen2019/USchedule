@@ -7,15 +7,13 @@ class Teacher(BaseModel):
     first_name: str
     last_name: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class Room(BaseModel):
     name: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class Building(BaseModel):

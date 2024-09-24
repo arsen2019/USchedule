@@ -10,13 +10,14 @@ from sqlalchemy import (
     UUID,
     func,
 )
-from sqlalchemy.orm import relationship, sessionmaker, declarative_base
+from sqlalchemy.orm import relationship, sessionmaker, declarative_base, class_mapper
 from core.models.base import Base
 
+Base.metadata.clear()
+print(len(Base.metadata.tables.items()))
 
 class Student(Base):
 
-    # __tablename__ = "student"
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
@@ -32,13 +33,21 @@ class Student(Base):
 
 
 class Group(Base):
-    # __tablename__ = "group"
+
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     name = Column(String, nullable=False)
     major_uuid = Column(UUID(as_uuid=True), ForeignKey("major.uuid"))
 
-    # major = relationship("major", backref="group")
-    # student = relationship("student", backref="group")
+
+    def __init__(self, name, major_uuid):
+        self.uuid = uuid4()
+        self.name = name
+        self.major_uuid = major_uuid
+
+class Lab(Base):
+    uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
+    name = Column(String, nullable=False)
+    major_uuid = Column(UUID(as_uuid=True), ForeignKey("major.uuid"))
 
     def __init__(self, name, major_uuid):
         self.uuid = uuid4()
@@ -48,24 +57,29 @@ class Group(Base):
 
 class Course(Base):
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
-    name = Column(String, nullable=False)
+    name_en = Column(String, nullable=False)
+    name_hy = Column(String, nullable=False)
+    name_ru = Column(String, nullable=False)
     room_uuid = Column(UUID(as_uuid=True), ForeignKey("room.uuid"))
     building_uuid = Column(UUID(as_uuid=True), ForeignKey("building.uuid"))
     teacher_uuid = Column(UUID(as_uuid=True), ForeignKey("teacher.uuid"))
     group_uuid = Column(UUID(as_uuid=True), ForeignKey("group.uuid"))
+    lab_uuid = Column(UUID(as_uuid=True), ForeignKey("lab.uuid"))
     day_of_week = Column(String, nullable=False)
     is_odd = Column(Boolean, nullable=False)
     is_lecture = Column(Boolean, nullable=False)
     start_time = Column(String, nullable=False)
     end_time = Column(String, nullable=False)
-    #
+
     teacher = relationship("Teacher")
     room = relationship("Room")
     building = relationship("Building")
 
     def __init__(
         self,
-        name,
+        name_en,
+        name_hy,
+        name_ru,
         room_uuid,
         building_uuid,
         teacher_uuid,
@@ -77,7 +91,9 @@ class Course(Base):
         end_time,
     ):
         self.uuid = uuid4()
-        self.name = name
+        self.name_en = name_en
+        self.name_hy = name_hy
+        self.name_ru = name_ru
         self.room_uuid = room_uuid
         self.building_uuid = building_uuid
         self.teacher_uuid = teacher_uuid
@@ -90,6 +106,7 @@ class Course(Base):
 
 
 class Major(Base):
+
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     name = Column(String, nullable=False)
 
@@ -99,6 +116,7 @@ class Major(Base):
 
 
 class Room(Base):
+
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     building_uuid = Column(UUID(as_uuid=True), ForeignKey("building.uuid"))
     name = Column(String, nullable=False)
@@ -110,19 +128,29 @@ class Room(Base):
 
 
 class Teacher(Base):
+
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
-    first_name = Column(String, nullable=False)
-    last_name = Column(String, nullable=False)
+    first_name_en = Column(String, nullable=False)
+    last_name_en = Column(String, nullable=False)
+    first_name_hy = Column(String, nullable=False)
+    last_name_hy = Column(String, nullable=False)
+    first_name_ru = Column(String, nullable=False)
+    last_name_ru = Column(String, nullable=False)
     department_uuid = Column(UUID(as_uuid=True), ForeignKey("department.uuid"))
 
-    def __init__(self, first_name, last_name, department_uuid):
+    def __init__(self, first_name_en, last_name_en, first_name_hy, last_name_hy, first_name_ru, last_name_ru, department_uuid):
         self.uuid = uuid4()
-        self.first_name = first_name
-        self.last_name = last_name
+        self.first_name_en = first_name_en
+        self.last_name_en = last_name_en
+        self.first_name_hy = first_name_hy
+        self.last_name_hy = last_name_hy
+        self.first_name_ru = first_name_ru
+        self.last_name_ru = last_name_ru
         self.department_uuid = department_uuid
 
 
 class Building(Base):
+
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     country = Column(String, nullable=False)
     city = Column(String, nullable=False)
@@ -140,6 +168,7 @@ class Building(Base):
 
 
 class Department(Base):
+
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4())
     room_uuid = Column(UUID(as_uuid=True), ForeignKey("room.uuid"))
     building_uuid = Column(UUID(as_uuid=True), ForeignKey("building.uuid"))

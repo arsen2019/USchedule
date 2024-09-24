@@ -6,6 +6,7 @@ __all__ = (
     "Department",
     "Major",
     "Group",
+    "Lab",
     "Student",
     "Course",
     "DatabaseHelper",
