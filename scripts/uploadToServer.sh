@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 scriptDir=$(dirname $0)
 
-destinationBase="do:/home/ars/"
-path="Schedule"
+destinationBase='ars@64.226.93.54:/home/ars/'
+path='Schedule'
 
 echo "Uploading to Digital Ocean"
 echo "Destination: ${destinationBase}${path}"
