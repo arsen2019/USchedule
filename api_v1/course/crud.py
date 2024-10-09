@@ -8,9 +8,8 @@ from .schemas import Course as CourseSchema
 from datetime import datetime
 
 
-
 async def get_courses(
-        group_uuid, request: Request, session: AsyncSession, current_week: datetime = datetime.now()
+        group_uuid, lab_uuid, request: Request, session: AsyncSession, current_week: datetime = datetime.now()
 ) -> list[Course]:
     language = request.headers.get('Accept-Language', 'en')
     print(language)
@@ -28,8 +27,10 @@ async def get_courses(
         select(
             Course,
         ).with_only_columns(
+            Course.uuid,
             getattr(Course, course_name_col).label('name'),
             Course.day_of_week,
+            Course.type,
             Course.start_time,
             Course.end_time,
             getattr(Teacher, first_name_col).label('first_name'),
@@ -40,7 +41,8 @@ async def get_courses(
         .join(Course.teacher)
         .join(Course.room)
         .join(Course.building)
-        .filter((Course.group_uuid == group_uuid) | Course.is_lecture)
+        .filter(or_((Course.group_uuid == group_uuid), (Course.lab_uuid == lab_uuid and lab_uuid is not None),
+                    Course.type == "Lecture", Course.type == "CourseWork"))
         .filter(Course.is_odd == is_current_week_odd)
     )
     print(CourseSchema)
@@ -48,19 +50,21 @@ async def get_courses(
     print(result)
     courses = [
         {
-            "name": row[0],
-            "day_of_week": row[1],
-            "start_time": row[2],
-            "end_time": row[3],
+            "uuid": row[0],
+            "name": row[1],
+            "day_of_week": row[2],
+            "type": row[3],
+            "start_time": row[4],
+            "end_time": row[5],
             "teacher": {
-                "first_name": row[4],
-                "last_name": row[5],
+                "first_name": row[6],
+                "last_name": row[7],
             },
             "room": {
-                "name": row[6]
+                "name": row[8]
             },
             "building": {
-                "name": row[7]
+                "name": row[9]
             }
         }
         for row in result
@@ -71,7 +75,6 @@ async def get_courses(
             status_code=404, detail="No courses found for the specified group"
         )
 
-
     day_order = {
         "Monday": 1,
         "Tuesday": 2,
@@ -79,8 +82,6 @@ async def get_courses(
         "Thursday": 4,
         "Friday": 5,
     }
-
-
 
     sorted_courses = sorted(
         courses,

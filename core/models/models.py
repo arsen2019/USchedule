@@ -65,9 +65,9 @@ class Course(Base):
     teacher_uuid = Column(UUID(as_uuid=True), ForeignKey("teacher.uuid"))
     group_uuid = Column(UUID(as_uuid=True), ForeignKey("group.uuid"))
     lab_uuid = Column(UUID(as_uuid=True), ForeignKey("lab.uuid"))
+    type = Column(String, nullable=False)
     day_of_week = Column(String, nullable=False)
     is_odd = Column(Boolean, nullable=False)
-    is_lecture = Column(Boolean, nullable=False)
     start_time = Column(String, nullable=False)
     end_time = Column(String, nullable=False)
 
@@ -84,9 +84,10 @@ class Course(Base):
         building_uuid,
         teacher_uuid,
         group_uuid,
+        lab_uuid,
         day_of_week,
+        type,
         is_odd,
-        is_lecture,
         start_time,
         end_time,
     ):
@@ -98,9 +99,10 @@ class Course(Base):
         self.building_uuid = building_uuid
         self.teacher_uuid = teacher_uuid
         self.group_uuid = group_uuid
+        self.lab_uuid = lab_uuid
         self.day_of_week = day_of_week
+        self.type = type
         self.is_odd = is_odd
-        self.is_lecture = is_lecture
         self.start_time = start_time
         self.end_time = end_time
 

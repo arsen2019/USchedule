@@ -15,4 +15,4 @@ __all__ = (
 
 from .base import Base
 from .db_helper import db_helper, DatabaseHelper
-from .models import Teacher, Building, Room, Department, Major, Group, Student, Course
+from .models import Teacher, Building, Room, Department, Major, Group, Student, Course, Lab

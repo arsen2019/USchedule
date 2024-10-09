@@ -21,8 +21,10 @@ class Building(BaseModel):
 
 
 class CourseBase(BaseModel):
+    uuid: uuid.UUID
     name: str
     day_of_week: str
+    type: str
     start_time: str
     end_time: str
 

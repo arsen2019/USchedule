@@ -54,6 +54,7 @@ networks:
   traefik:
     external: true
   uschedule-net:
+    name: uschedule-net
     driver: bridge
 volumes:
   postgres-data:
