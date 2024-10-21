@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from core.models import Base, db_helper
 from api_v1 import router_for_course as router_v1
 from api_v1 import router_for_group as router_v2
+from api_v1 import router_for_status as router_v3
 from core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -33,6 +34,7 @@ app.add_middleware(
 
 app.include_router(router=router_v1, prefix=settings.api_v1_prefix)
 app.include_router(router=router_v2, prefix=settings.api_v1_prefix)
+app.include_router(router=router_v3, prefix=settings.api_v1_prefix)
 
 
 if __name__ == "__main__":
