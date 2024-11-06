@@ -68,7 +68,7 @@ CREATE TABLE public.building (
 ALTER TABLE public.building OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 33839)
+-- TOC entry 224 (class 1259 OID 34335)
 -- Name: course; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -93,7 +93,7 @@ CREATE TABLE public.course (
 ALTER TABLE public.course OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 33810)
+-- TOC entry 222 (class 1259 OID 34306)
 -- Name: department; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -108,7 +108,7 @@ CREATE TABLE public.department (
 ALTER TABLE public.department OWNER TO postgres;
 
 --
--- TOC entry 218 (class 1259 OID 33762)
+-- TOC entry 218 (class 1259 OID 34258)
 -- Name: group; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -122,7 +122,7 @@ CREATE TABLE public."group" (
 ALTER TABLE public."group" OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1259 OID 33774)
+-- TOC entry 219 (class 1259 OID 34270)
 -- Name: lab; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -136,7 +136,7 @@ CREATE TABLE public.lab (
 ALTER TABLE public.lab OWNER TO postgres;
 
 --
--- TOC entry 216 (class 1259 OID 33748)
+-- TOC entry 216 (class 1259 OID 34244)
 -- Name: major; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -149,7 +149,7 @@ CREATE TABLE public.major (
 ALTER TABLE public.major OWNER TO postgres;
 
 --
--- TOC entry 220 (class 1259 OID 33786)
+-- TOC entry 220 (class 1259 OID 34282)
 -- Name: room; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -163,7 +163,7 @@ CREATE TABLE public.room (
 ALTER TABLE public.room OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 33798)
+-- TOC entry 221 (class 1259 OID 34294)
 -- Name: student; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -179,7 +179,7 @@ CREATE TABLE public.student (
 ALTER TABLE public.student OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 33827)
+-- TOC entry 223 (class 1259 OID 34323)
 -- Name: teacher; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -198,210 +198,211 @@ CREATE TABLE public.teacher (
 ALTER TABLE public.teacher OWNER TO postgres;
 
 --
--- TOC entry 4894 (class 0 OID 33755)
+-- TOC entry 4894 (class 0 OID 34251)
 -- Dependencies: 217
 -- Data for Name: building; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.building (uuid, country, city, street, longitude, latitude, name) FROM stdin;
-a1a5dc14-79d7-48ce-baf8-2e8d2ea97394	Armenia	Yerevan	Teryan 52	\N	\N	2
-f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	Armenia	Yerevan	Teryan 52	\N	\N	5
-8003aa6e-8411-4adc-a218-c9df6235a309	Armenia	Yerevan	Koryun 9	\N	\N	12
-aee7c8ca-1ac8-4ef2-a33d-fe93b6cb7705	Armenia	Yerevan	Koryun 11	\N	\N	9
+108e1304-38e3-4419-b1de-a132480763fa	Armenia	Yerevan	Teryan 52	\N	\N	2
+58439e57-8a29-4ae4-bd2a-644a8041fc49	Armenia	Yerevan	Teryan 52	\N	\N	5
+58b215ad-708d-41a9-ab2a-007693f4970a	Armenia	Yerevan	Koryun 9	\N	\N	12
+646b0369-464c-49c1-bb53-ebc6cfd72b0b	Armenia	Yerevan	Koryun 11	\N	\N	9
 \.
 
 
 --
--- TOC entry 4901 (class 0 OID 33839)
+-- TOC entry 4901 (class 0 OID 34335)
 -- Dependencies: 224
 -- Data for Name: course; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.course (uuid, name_en, name_hy, name_ru, room_uuid, building_uuid, teacher_uuid, group_uuid, lab_uuid, type, day_of_week, is_odd, start_time, end_time) FROM stdin;
-b5a21599-a1f2-4c14-a7d9-17fe3bd29836	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	087b75d9-df4c-4e40-aad6-b474f6d3fa44	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	92cc84f2-3149-463e-8a87-7f47ca6fc7ad	\N	Practical	Monday	t	9:30	10:50
-260e34e4-1898-47f5-af56-8b38c5e918df	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	6c380377-12e8-4de2-ae71-01e445da5a47	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	92cc84f2-3149-463e-8a87-7f47ca6fc7ad	\N	Practical	Monday	f	9:30	10:50
-c2ddabda-bec4-4902-94f5-12dc388028b1	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	6c380377-12e8-4de2-ae71-01e445da5a47	8003aa6e-8411-4adc-a218-c9df6235a309	912d51e4-baba-4ace-8c07-dc0c8181f725	135cc20b-58af-447b-a25f-10201326c4ba	\N	Practical	Monday	t	9:30	10:50
-75c4d026-0fc2-4398-a13f-b5e6cf706856	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	ec1e562b-64fa-4082-a2b0-9db5bd30816b	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	\N	\N	Lecture	Monday	t	11:00	12:20
-21b6345c-27b4-4e39-b511-347ad5415543	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	1675d9ca-9f12-4c87-82d7-b018a9e1ac19	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	a023c56b-f9ed-41e2-a1d1-5bc754f81b2c	Laboratory	Monday	t	12:50	14:10
-6836e516-4e81-411c-b08a-f495ac239ffe	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	1675d9ca-9f12-4c87-82d7-b018a9e1ac19	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	a023c56b-f9ed-41e2-a1d1-5bc754f81b2c	Laboratory	Monday	f	12:50	14:10
-699614c2-9f94-44c8-b3d8-46166580d8b2	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	\N	\N	CourseWork	Monday	t	14:20	15:40
-6bdf986a-a2a2-46cf-a73a-4d4030e9416f	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	\N	\N	CourseWork	Monday	f	14:20	15:40
-01bc7ecb-0df0-4b38-8146-e6211018488a	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	ec1e562b-64fa-4082-a2b0-9db5bd30816b	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	\N	\N	Lecture	Monday	f	11:00	12:20
-5841de71-1961-4d09-aa2f-744b2fe89836	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	\N	Lecture	Tuesday	f	9:30	10:50
-12dac70f-8ea2-4d05-a5cf-50ef8c093752	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	\N	Lecture	Tuesday	t	9:30	10:50
-d7a51d81-7c47-4cea-b70b-88884b269c82	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	087b75d9-df4c-4e40-aad6-b474f6d3fa44	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	92cc84f2-3149-463e-8a87-7f47ca6fc7ad	\N	Practical	Tuesday	t	11:00	12:20
-9bb3899d-ce2f-43f2-8cae-3d9d1038273c	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	a023c56b-f9ed-41e2-a1d1-5bc754f81b2c	Laboratory	Tuesday	t	11:00	12:20
-5a5f8a3c-8544-483d-a3d5-b53f4ffd0d94	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	a023c56b-f9ed-41e2-a1d1-5bc754f81b2c	Laboratory	Tuesday	f	11:00	12:20
-a785aa13-38e2-42cd-b953-853fa16ce365	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	4c906e13-dddb-451e-aef6-84b81ed0a55f	Laboratory	Tuesday	t	12:50	14:10
-4a035a1e-4449-4379-81ef-c5dd472602c0	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	4c906e13-dddb-451e-aef6-84b81ed0a55f	Laboratory	Tuesday	f	12:50	14:10
-b20b9429-dd83-414c-9751-f5836bd6917d	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	77e1157c-fd29-42c0-b614-d87fe09511a4	Laboratory	Tuesday	t	14:20	15:40
-a20531b0-3718-4dd9-9d6c-f1668f50bb03	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	6988a51d-209b-4d91-a99d-26fcdb74d0e4	\N	77e1157c-fd29-42c0-b614-d87fe09511a4	Laboratory	Tuesday	f	14:20	15:40
-b9c0bc70-c5cd-46df-be9a-0d01d7d4a2b7	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	77e1157c-fd29-42c0-b614-d87fe09511a4	Laboratory	Tuesday	f	12:50	14:10
-360ccae8-443b-4d54-ac81-0c93ff56f210	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	77e1157c-fd29-42c0-b614-d87fe09511a4	Laboratory	Tuesday	t	12:50	14:10
-4c962e64-ac95-47c0-8356-d0904e09adfc	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	5fecc709-26b8-4901-b275-483969a214ba	Laboratory	Tuesday	t	14:20	15:40
-97addea0-3ad2-402e-8e2b-8996f4f98526	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	5fecc709-26b8-4901-b275-483969a214ba	Laboratory	Tuesday	f	14:20	15:40
-d1209624-f1ab-42b2-9487-001a59e2fb9a	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	6c380377-12e8-4de2-ae71-01e445da5a47	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	5fecc709-26b8-4901-b275-483969a214ba	Laboratory	Tuesday	f	12:50	14:10
-c7ff2776-4c00-4a86-b1ce-b344a42a3154	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	6c380377-12e8-4de2-ae71-01e445da5a47	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	5fecc709-26b8-4901-b275-483969a214ba	Laboratory	Tuesday	t	12:50	14:10
-5dadef1e-b9ca-4636-bde9-7e0d438cff72	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	27aa3bd5-630a-4199-b649-4566dd683c53	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	4c906e13-dddb-451e-aef6-84b81ed0a55f	Laboratory	Tuesday	f	14:20	15:40
-7eceb165-30b3-4527-8e87-1b43bfad1bf3	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	27aa3bd5-630a-4199-b649-4566dd683c53	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	4c906e13-dddb-451e-aef6-84b81ed0a55f	Laboratory	Tuesday	t	14:20	15:40
-148b5047-8eaf-4a58-aca2-03778427a978	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	ec1e562b-64fa-4082-a2b0-9db5bd30816b	8003aa6e-8411-4adc-a218-c9df6235a309	2e510a4e-3b76-451c-a74f-07b539a15437	b872f8a1-8f50-4f0e-b824-0c9ee103b703	\N	Practical	Wednesday	t	9:30	10:50
-6ad909d5-be0c-42ba-a2ad-d6deb679e68b	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	\N	Lecture	Wednesday	f	11:00	12:20
-b8b1af1c-5e52-422c-8ce9-4a722eea591d	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	\N	Lecture	Wednesday	t	11:00	12:20
-0e35b452-be90-4a0e-9180-c8f77bd690c9	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	\N	Lecture	Wednesday	f	12:50	14:10
-df5be483-190a-4a11-a30c-f6b7d393517b	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	\N	Lecture	Wednesday	t	12:50	14:10
-026a7cf3-9b70-41ed-ae2c-0b352bd8c2df	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	912d51e4-baba-4ace-8c07-dc0c8181f725	\N	\N	Lecture	Wednesday	t	14:20	15:40
-6b59ff7c-4ff5-4d6e-a5c5-43941957f2c2	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	912d51e4-baba-4ace-8c07-dc0c8181f725	\N	\N	Lecture	Wednesday	f	14:20	15:40
-089cf6ad-78ad-4287-97a9-7b4415800f55	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	087b75d9-df4c-4e40-aad6-b474f6d3fa44	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	b872f8a1-8f50-4f0e-b824-0c9ee103b703	\N	Practical	Thursday	t	9:30	10:50
-7324fba4-3963-4724-84d9-7f680c22c74d	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	087b75d9-df4c-4e40-aad6-b474f6d3fa44	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	b872f8a1-8f50-4f0e-b824-0c9ee103b703	\N	Practical	Thursday	f	9:30	10:50
-1697d290-e437-4007-949c-db98fe2c6b20	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	ec1e562b-64fa-4082-a2b0-9db5bd30816b	8003aa6e-8411-4adc-a218-c9df6235a309	2e510a4e-3b76-451c-a74f-07b539a15437	135cc20b-58af-447b-a25f-10201326c4ba	\N	Practical	Thursday	t	9:30	10:50
-530cfb98-1c9e-4b4a-bd2e-ceb500b10f29	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	27aa3bd5-630a-4199-b649-4566dd683c53	8003aa6e-8411-4adc-a218-c9df6235a309	2e510a4e-3b76-451c-a74f-07b539a15437	135cc20b-58af-447b-a25f-10201326c4ba	\N	Practical	Thursday	f	9:30	10:50
-ecf868a6-6e59-4068-bf3a-3f1f7017ebc6	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	83a5fb28-fef9-4837-9d3e-fa0ff1e996fa	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	\N	\N	CourseWork	Thursday	t	11:00	12:20
-bdc30ad0-a1d8-4ff4-9660-132124bf2bb4	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	83a5fb28-fef9-4837-9d3e-fa0ff1e996fa	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	\N	\N	CourseWork	Thursday	f	11:00	12:20
-a0cc6cc8-b7c4-424d-afc7-272b7ef5a6f6	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	135cc20b-58af-447b-a25f-10201326c4ba	\N	Practical	Thursday	t	14:20	15:40
-b4027873-78cc-466d-9091-a118168e3c4c	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	1675d9ca-9f12-4c87-82d7-b018a9e1ac19	8003aa6e-8411-4adc-a218-c9df6235a309	912d51e4-baba-4ace-8c07-dc0c8181f725	92cc84f2-3149-463e-8a87-7f47ca6fc7ad	\N	Practical	Thursday	t	14:20	15:40
-3986d010-fc51-4b9d-b7fd-9ab091bb68b5	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	6e157099-e7ea-4cca-97d5-86bf18fb6a7d	135cc20b-58af-447b-a25f-10201326c4ba	\N	Practical	Thursday	f	14:20	15:40
-66d5db38-9149-455b-b0dd-aa010609183d	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	1675d9ca-9f12-4c87-82d7-b018a9e1ac19	8003aa6e-8411-4adc-a218-c9df6235a309	912d51e4-baba-4ace-8c07-dc0c8181f725	b872f8a1-8f50-4f0e-b824-0c9ee103b703	\N	Practical	Thursday	f	14:20	15:40
-be458d1b-7681-492c-8c08-3e1d4b443cc6	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	5ea6b204-fdf5-483f-a6c7-5c7b6f740499	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	77e1157c-fd29-42c0-b614-d87fe09511a4	Laboratory	Thursday	t	12:50	14:10
-c8a5a070-685e-41ec-939d-66cfec25d7ae	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	5ea6b204-fdf5-483f-a6c7-5c7b6f740499	8003aa6e-8411-4adc-a218-c9df6235a309	5588b7d4-4eea-4059-a444-f45a202df4ec	\N	77e1157c-fd29-42c0-b614-d87fe09511a4	Laboratory	Thursday	f	12:50	14:10
-6dcda474-05ea-4390-9dde-8944d929f94d	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	4c906e13-dddb-451e-aef6-84b81ed0a55f	Laboratory	Thursday	t	12:50	14:10
-47a48281-c8a1-4ba0-a5ce-96f6f64659b7	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	4c906e13-dddb-451e-aef6-84b81ed0a55f	Laboratory	Thursday	f	12:50	14:10
-18cb7921-7845-4be4-8122-099dc6b988aa	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	ec1e562b-64fa-4082-a2b0-9db5bd30816b	8003aa6e-8411-4adc-a218-c9df6235a309	2e510a4e-3b76-451c-a74f-07b539a15437	\N	\N	Lecture	Friday	t	9:30	10:50
-f9b069eb-3a73-495e-8095-585f9058c79b	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	a023c56b-f9ed-41e2-a1d1-5bc754f81b2c	Laboratory	Friday	t	11:00	12:20
-0a0c5544-4026-4e45-92f9-34dcc6afe2b5	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	481b3111-46fd-4d00-ac75-d8b5ab366902	\N	a023c56b-f9ed-41e2-a1d1-5bc754f81b2c	Laboratory	Friday	f	11:00	12:20
-f90ab304-535b-46c3-904d-1d0ded2760b3	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	27aa3bd5-630a-4199-b649-4566dd683c53	8003aa6e-8411-4adc-a218-c9df6235a309	2e510a4e-3b76-451c-a74f-07b539a15437	92cc84f2-3149-463e-8a87-7f47ca6fc7ad	\N	Practical	Friday	t	11:00	12:20
-b3e661b6-d25c-42f6-afe7-35cbb28da310	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	27aa3bd5-630a-4199-b649-4566dd683c53	8003aa6e-8411-4adc-a218-c9df6235a309	2e510a4e-3b76-451c-a74f-07b539a15437	92cc84f2-3149-463e-8a87-7f47ca6fc7ad	\N	Practical	Friday	f	11:00	12:20
-5b2cea75-46ab-4836-bbf8-3af9b183889b	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	0975873c-d93f-4be4-a33e-5c28511f6078	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	b872f8a1-8f50-4f0e-b824-0c9ee103b703	\N	Practical	Friday	t	12:50	14:10
-6a524d01-49e8-46a5-948b-4364e878dcf0	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	0975873c-d93f-4be4-a33e-5c28511f6078	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	135cc20b-58af-447b-a25f-10201326c4ba	\N	Practical	Friday	t	14:20	15:40
-0ccaa941-9a92-4a5b-9ee3-4773ca43cc75	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	0975873c-d93f-4be4-a33e-5c28511f6078	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	b872f8a1-8f50-4f0e-b824-0c9ee103b703	\N	Practical	Friday	f	12:50	14:10
-63bed299-3b9c-4111-80e6-501cc847670a	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	0975873c-d93f-4be4-a33e-5c28511f6078	8003aa6e-8411-4adc-a218-c9df6235a309	bf3068ad-bfc7-419b-ae92-4e6930b44d2d	135cc20b-58af-447b-a25f-10201326c4ba	\N	Practical	Friday	f	14:20	15:40
+7bae866c-859d-47cb-877e-61da16e92e36	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	5093f881-29b9-47e7-9208-5159f8b3b918	Laboratory	Monday	t	12:50	14:10
+49aca84f-f115-4795-8fb7-d8e7103d3dda	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	5093f881-29b9-47e7-9208-5159f8b3b918	Laboratory	Monday	f	12:50	14:10
+ec36fac9-612c-4a68-9e33-df11c42226b3	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	68d896c7-6b69-4635-9517-18974f69945a	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	e3089044-5f4d-4c4f-978a-c7b4663e4c03	\N	Practical	Monday	t	9:30	10:50
+cf3a2ef7-5de7-41d0-ad69-bb38e36dc5d9	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	0ac77ba7-3b21-40c3-b134-fad2ac8e510e	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	e3089044-5f4d-4c4f-978a-c7b4663e4c03	\N	Practical	Monday	f	9:30	10:50
+ad86c9a1-530f-4075-961f-d260a746daf1	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	0ac77ba7-3b21-40c3-b134-fad2ac8e510e	58b215ad-708d-41a9-ab2a-007693f4970a	367f66d7-a457-4191-a3d3-f952822fea0d	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	\N	Practical	Monday	t	9:30	10:50
+00f8f1a7-f701-43ca-ba84-c657568846bb	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	a6d1afd6-977e-41bd-899f-5ed2dfcee4f8	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	\N	\N	Lecture	Monday	t	11:00	12:20
+e11b9ceb-1c5e-49fb-a671-9b61e422b2a3	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	0e5c070a-3db4-484d-8a17-c90cbc886000	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	d03fb752-9508-4722-b402-413f3d25dfd1	Laboratory	Monday	t	12:50	14:10
+26dcd3ea-af25-401f-b183-c8b4cd5c347f	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	0e5c070a-3db4-484d-8a17-c90cbc886000	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	d03fb752-9508-4722-b402-413f3d25dfd1	Laboratory	Monday	f	12:50	14:10
+f1ece92b-e1c6-4439-8826-931f7066ba8d	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	\N	\N	CourseWork	Monday	t	14:20	15:40
+6c20a944-e052-4c44-a64b-330dc8ff4ea1	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	\N	\N	CourseWork	Monday	f	14:20	15:40
+b170acd0-f720-46e4-b574-b11e36f67593	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	a6d1afd6-977e-41bd-899f-5ed2dfcee4f8	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	\N	\N	Lecture	Monday	f	11:00	12:20
+9a0e68e7-a761-4da1-aa12-0d4a5fa8e964	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	\N	Lecture	Tuesday	f	9:30	10:50
+981622df-a0f9-4a9c-bb55-6b4f5619fa87	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	\N	Lecture	Tuesday	t	9:30	10:50
+36d66846-0dfa-4b3b-88fe-bc613361805b	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	68d896c7-6b69-4635-9517-18974f69945a	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	12e73255-9673-48ac-9960-efcfe47a0563	\N	Practical	Tuesday	t	11:00	12:20
+7597fae4-523c-4ce5-b1df-2ae3ab79d078	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	d03fb752-9508-4722-b402-413f3d25dfd1	Laboratory	Tuesday	t	11:00	12:20
+1e0d8639-1a40-4221-bac2-343702f039c9	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	d03fb752-9508-4722-b402-413f3d25dfd1	Laboratory	Tuesday	f	11:00	12:20
+dd70625d-5856-432e-83ea-7cf864bfa11a	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	7242dea5-ad50-45aa-a122-6f16eac1fd38	Laboratory	Tuesday	t	12:50	14:10
+7903d377-3f2e-46f5-8931-2ee992b4a242	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	7242dea5-ad50-45aa-a122-6f16eac1fd38	Laboratory	Tuesday	f	12:50	14:10
+831b0c33-c128-4ece-a8dc-9c80df7c2ee6	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	a9e474df-61a6-48b0-97c9-1aa03b1cde31	Laboratory	Tuesday	t	14:20	15:40
+5b954a91-f84b-4cda-88c4-3300efc37063	Programming Theory	Ծրագրավորման Տեսություն	Теория Программирования	cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	ad501b23-8d32-4165-b327-c30188e55de0	\N	a9e474df-61a6-48b0-97c9-1aa03b1cde31	Laboratory	Tuesday	f	14:20	15:40
+cd937e8b-2e12-46d7-8cb9-ff49b18efe2a	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	a9e474df-61a6-48b0-97c9-1aa03b1cde31	Laboratory	Tuesday	f	12:50	14:10
+6a49359e-cc97-49e3-bd4e-6c640fb49c76	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	a9e474df-61a6-48b0-97c9-1aa03b1cde31	Laboratory	Tuesday	t	12:50	14:10
+8e9c5df4-63e9-4c5c-9bb6-5ce644c51aa6	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	5093f881-29b9-47e7-9208-5159f8b3b918	Laboratory	Tuesday	t	14:20	15:40
+c8db9327-c6e2-4cac-8819-32e3c978cc90	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	5093f881-29b9-47e7-9208-5159f8b3b918	Laboratory	Tuesday	f	14:20	15:40
+338bfd41-d819-48c8-a267-3854bdcb052f	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	0ac77ba7-3b21-40c3-b134-fad2ac8e510e	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	5093f881-29b9-47e7-9208-5159f8b3b918	Laboratory	Tuesday	f	12:50	14:10
+c02ff804-3787-4471-863a-128df416b658	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	0ac77ba7-3b21-40c3-b134-fad2ac8e510e	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	5093f881-29b9-47e7-9208-5159f8b3b918	Laboratory	Tuesday	t	12:50	14:10
+59052315-5dac-4442-99b2-a7b51e6e26a3	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	effd6097-ec9f-4335-9896-5304f0143993	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	7242dea5-ad50-45aa-a122-6f16eac1fd38	Laboratory	Tuesday	f	14:20	15:40
+9a283fea-1438-4a41-9f37-9349c2ee8aed	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	effd6097-ec9f-4335-9896-5304f0143993	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	7242dea5-ad50-45aa-a122-6f16eac1fd38	Laboratory	Tuesday	t	14:20	15:40
+5eabb73e-cbde-4b59-a0db-6572820323f6	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	a6d1afd6-977e-41bd-899f-5ed2dfcee4f8	58b215ad-708d-41a9-ab2a-007693f4970a	85cbdc60-9500-4c90-abb4-e8e50541848d	e3089044-5f4d-4c4f-978a-c7b4663e4c03	\N	Practical	Wednesday	t	9:30	10:50
+53c882cc-d2ec-460e-8c37-f93a5ed95544	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	0e5c070a-3db4-484d-8a17-c90cbc886000	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	\N	Lecture	Thursday	f	11:00	12:20
+e5ca3a30-49d0-4dcd-99a8-9a51a53472d0	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	0e5c070a-3db4-484d-8a17-c90cbc886000	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	\N	Lecture	Thursday	t	11:00	12:20
+af99f4d7-366c-4666-b199-ecdf2a9ce7d3	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	\N	Lecture	Wednesday	f	12:50	14:10
+1e8c55b3-1c27-4c7c-99f3-d90b1c384b56	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	\N	Lecture	Wednesday	t	12:50	14:10
+82ae1dd8-ef80-4951-ac33-496df98da207	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	367f66d7-a457-4191-a3d3-f952822fea0d	\N	\N	Lecture	Wednesday	t	14:20	15:40
+7b0a843c-577c-4a53-b670-bac75e1870a3	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	367f66d7-a457-4191-a3d3-f952822fea0d	\N	\N	Lecture	Wednesday	f	14:20	15:40
+e3f1f084-527a-425b-aef4-18b1b4688fef	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	68d896c7-6b69-4635-9517-18974f69945a	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	e3089044-5f4d-4c4f-978a-c7b4663e4c03	\N	Practical	Thursday	t	9:30	10:50
+f6d21fab-eb0c-4a6b-90f0-7fa42d243d3d	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	68d896c7-6b69-4635-9517-18974f69945a	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	e3089044-5f4d-4c4f-978a-c7b4663e4c03	\N	Practical	Thursday	f	9:30	10:50
+c800ce89-fd5a-4aa9-a236-356742815643	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	a6d1afd6-977e-41bd-899f-5ed2dfcee4f8	58b215ad-708d-41a9-ab2a-007693f4970a	85cbdc60-9500-4c90-abb4-e8e50541848d	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	\N	Practical	Thursday	t	9:30	10:50
+f0724156-eb5d-4f4b-a432-2ead8f6f0382	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	effd6097-ec9f-4335-9896-5304f0143993	58b215ad-708d-41a9-ab2a-007693f4970a	85cbdc60-9500-4c90-abb4-e8e50541848d	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	\N	Practical	Thursday	f	9:30	10:50
+e6b9886f-c2cc-4134-803c-5f4a6abd01ba	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	53326c78-e0d7-4d33-839c-fd48df4944ae	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	\N	\N	CourseWork	Friday	f	9:30	10:50
+6a3bc803-551b-412e-80e5-af61a0d2c662	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	\N	Practical	Thursday	t	14:20	15:40
+3d7c21f4-c2b2-44c6-bccb-9aca5a0f87ce	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	0e5c070a-3db4-484d-8a17-c90cbc886000	58b215ad-708d-41a9-ab2a-007693f4970a	367f66d7-a457-4191-a3d3-f952822fea0d	12e73255-9673-48ac-9960-efcfe47a0563	\N	Practical	Thursday	t	14:20	15:40
+eded95d2-e1fb-4f93-9bd2-8a95bc013008	Coding Theory	Կոդավորման Տեսություն	Теория кодирования	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	4c6d7168-01ce-4b78-bf6c-5f492672a4be	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	\N	Practical	Thursday	f	14:20	15:40
+6bf3942c-c92f-4b01-b32a-1fb7c30c6f43	Math-Physics Equations	Մաթ-Ֆիզիկական Հավասարումներ	Математико-физические уравнения	0e5c070a-3db4-484d-8a17-c90cbc886000	58b215ad-708d-41a9-ab2a-007693f4970a	367f66d7-a457-4191-a3d3-f952822fea0d	e3089044-5f4d-4c4f-978a-c7b4663e4c03	\N	Practical	Thursday	f	14:20	15:40
+40272b91-aa91-4a4d-9360-c88d42d9db4d	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	6a03ff90-f8eb-46b7-935f-7dc05a2669f8	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	a9e474df-61a6-48b0-97c9-1aa03b1cde31	Laboratory	Thursday	t	12:50	14:10
+6503dbcf-cdef-457f-a535-6ad2f25fad44	Discrete Mathematics	Դիսկրետ Մաթեմատիկա	Дискретная математика	6a03ff90-f8eb-46b7-935f-7dc05a2669f8	58b215ad-708d-41a9-ab2a-007693f4970a	b3608d87-4bc1-4928-97f2-314278853177	\N	a9e474df-61a6-48b0-97c9-1aa03b1cde31	Laboratory	Thursday	f	12:50	14:10
+e7ae23eb-9012-45b0-9478-12f0610d2c69	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	7242dea5-ad50-45aa-a122-6f16eac1fd38	Laboratory	Thursday	t	12:50	14:10
+8e87bbf2-fcb3-4d80-9fea-50dffb2c7e66	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	7242dea5-ad50-45aa-a122-6f16eac1fd38	Laboratory	Thursday	f	12:50	14:10
+1ab52bc9-348c-4cca-8c81-c7df4d993a82	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	a6d1afd6-977e-41bd-899f-5ed2dfcee4f8	58b215ad-708d-41a9-ab2a-007693f4970a	85cbdc60-9500-4c90-abb4-e8e50541848d	\N	\N	Lecture	Friday	t	9:30	10:50
+e39516b5-00b8-4443-b1f2-192750fbe921	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	d03fb752-9508-4722-b402-413f3d25dfd1	Laboratory	Friday	t	11:00	12:20
+37abe2cf-1633-432e-ba40-d6f81602669e	Math Programming	Մաթ․ Ծրագրավորում	Математическое программирование	4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	d2e9836e-4572-4bee-af7e-000be864282b	\N	d03fb752-9508-4722-b402-413f3d25dfd1	Laboratory	Friday	f	11:00	12:20
+da7fb46d-c8a3-465b-b95c-1a68166f1a9c	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	effd6097-ec9f-4335-9896-5304f0143993	58b215ad-708d-41a9-ab2a-007693f4970a	85cbdc60-9500-4c90-abb4-e8e50541848d	12e73255-9673-48ac-9960-efcfe47a0563	\N	Practical	Friday	t	11:00	12:20
+a23465b8-90b1-4175-bb54-17c8265506d6	Probability Theory	Հավանականության Տեսություն	Теория Вероятностей	effd6097-ec9f-4335-9896-5304f0143993	58b215ad-708d-41a9-ab2a-007693f4970a	85cbdc60-9500-4c90-abb4-e8e50541848d	12e73255-9673-48ac-9960-efcfe47a0563	\N	Practical	Friday	f	11:00	12:20
+3e1d0f9e-095e-4267-8de5-8d8920fbf4b0	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	2a0cef64-9eb8-49ff-938e-59440d530304	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	12e73255-9673-48ac-9960-efcfe47a0563	\N	Practical	Monday	t	12:50	14:10
+a9ee35f8-5d79-4da5-829b-a585fe7fbc5b	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	2a0cef64-9eb8-49ff-938e-59440d530304	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	\N	Practical	Wednesday	t	11:00	12:20
+2f087f43-efd1-4539-ae96-d8e18f58916a	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	2a0cef64-9eb8-49ff-938e-59440d530304	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	12e73255-9673-48ac-9960-efcfe47a0563	\N	Practical	Monday	f	12:50	14:10
+9121003b-5b3e-4840-84d8-16775992d382	Computer Architecture	ԷՀՄ  Ճարտարագիտություն	ЭВМ Архитектура	2a0cef64-9eb8-49ff-938e-59440d530304	58b215ad-708d-41a9-ab2a-007693f4970a	08e9e068-6b00-43b0-8b10-1fdc43fa9c30	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	\N	Practical	Wednesday	f	11:00	12:20
 \.
 
 
 --
--- TOC entry 4899 (class 0 OID 33810)
+-- TOC entry 4899 (class 0 OID 34306)
 -- Dependencies: 222
 -- Data for Name: department; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.department (uuid, room_uuid, building_uuid, name) FROM stdin;
-f7440f4c-21bf-4652-aad0-98501930ee7b	ce7c1b5a-f3a1-4d2b-bafd-ab4b2edc403e	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	Informatics
-09373d78-ce5c-47f8-b89b-0300b6eaa428	82a5b612-d5e6-4006-b8f2-38ed34b45b02	8003aa6e-8411-4adc-a218-c9df6235a309	Mathematics
-47361c69-8535-4f7f-95bc-9f19ee68ac7b	d9e8bd2a-a1e7-4284-9e6c-e9958d8d64e4	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	Programming and Algorithms
-c31726ba-ed3c-4173-b250-5e47cb05b3f0	afd955a3-6149-4023-b3d2-9d01f893940a	a1a5dc14-79d7-48ce-baf8-2e8d2ea97394	Philosophy
-4c22473e-4d1c-436f-b10d-0c3f2ec70780	66f355de-985c-4537-96b2-7503578147ca	aee7c8ca-1ac8-4ef2-a33d-fe93b6cb7705	Mechanics
+957ad9d5-4e94-4649-a301-194ea863e878	8927422c-9db6-43bb-ab93-ad263220b02f	58439e57-8a29-4ae4-bd2a-644a8041fc49	Informatics
+3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3	bb21757a-a2cd-4b0c-82d3-cd1bc04c2461	58b215ad-708d-41a9-ab2a-007693f4970a	Mathematics
+4e494530-66bb-43c9-a0c3-5de48e6be0b5	8547b43a-007e-40f4-893d-895718456668	58439e57-8a29-4ae4-bd2a-644a8041fc49	Programming and Algorithms
+032e1d7f-3e23-491d-bdfe-9a0ca753df5b	64ac5087-13de-4858-a532-36cbb8c5d334	108e1304-38e3-4419-b1de-a132480763fa	Philosophy
+1877435f-488e-4d8d-9b88-6ec1b99b29fd	2ee06dfa-4b46-4c4d-95c1-2212eb993993	646b0369-464c-49c1-bb53-ebc6cfd72b0b	Mechanics
 \.
 
 
 --
--- TOC entry 4895 (class 0 OID 33762)
+-- TOC entry 4895 (class 0 OID 34258)
 -- Dependencies: 218
 -- Data for Name: group; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public."group" (uuid, name, major_uuid) FROM stdin;
-b872f8a1-8f50-4f0e-b824-0c9ee103b703	240-1	aa4d8d4f-21df-4e57-b813-c63635d38c5c
-135cc20b-58af-447b-a25f-10201326c4ba	240-2	aa4d8d4f-21df-4e57-b813-c63635d38c5c
-92cc84f2-3149-463e-8a87-7f47ca6fc7ad	240-3	aa4d8d4f-21df-4e57-b813-c63635d38c5c
+e3089044-5f4d-4c4f-978a-c7b4663e4c03	240-1	9a99be68-d8db-4269-9e27-fc77ca184daa
+4e6b443e-be3b-456d-aa7f-6ba55e4d7c61	240-2	9a99be68-d8db-4269-9e27-fc77ca184daa
+12e73255-9673-48ac-9960-efcfe47a0563	240-3	9a99be68-d8db-4269-9e27-fc77ca184daa
 \.
 
 
 --
--- TOC entry 4896 (class 0 OID 33774)
+-- TOC entry 4896 (class 0 OID 34270)
 -- Dependencies: 219
 -- Data for Name: lab; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.lab (uuid, name, major_uuid) FROM stdin;
-5fecc709-26b8-4901-b275-483969a214ba	1	aa4d8d4f-21df-4e57-b813-c63635d38c5c
-a023c56b-f9ed-41e2-a1d1-5bc754f81b2c	2	aa4d8d4f-21df-4e57-b813-c63635d38c5c
-77e1157c-fd29-42c0-b614-d87fe09511a4	3	aa4d8d4f-21df-4e57-b813-c63635d38c5c
-4c906e13-dddb-451e-aef6-84b81ed0a55f	4	aa4d8d4f-21df-4e57-b813-c63635d38c5c
+5093f881-29b9-47e7-9208-5159f8b3b918	1	9a99be68-d8db-4269-9e27-fc77ca184daa
+d03fb752-9508-4722-b402-413f3d25dfd1	2	9a99be68-d8db-4269-9e27-fc77ca184daa
+a9e474df-61a6-48b0-97c9-1aa03b1cde31	3	9a99be68-d8db-4269-9e27-fc77ca184daa
+7242dea5-ad50-45aa-a122-6f16eac1fd38	4	9a99be68-d8db-4269-9e27-fc77ca184daa
 \.
 
 
 --
--- TOC entry 4893 (class 0 OID 33748)
+-- TOC entry 4893 (class 0 OID 34244)
 -- Dependencies: 216
 -- Data for Name: major; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.major (uuid, name) FROM stdin;
-aa4d8d4f-21df-4e57-b813-c63635d38c5c	Applied Mathematics and Informatics
-cb45ff07-d41b-4258-a477-88cd1754ae30	Cyber Security
-77666755-a1c6-4e69-a8ab-93eb4e20d9b1	Artificial Inteligence
-0c648cad-df0a-444d-9ea8-43c20192a124	Programming Architecture
+9a99be68-d8db-4269-9e27-fc77ca184daa	Applied Mathematics and Informatics
+7431e33c-4e0b-434d-86ab-30bc56df7406	Cyber Security
+86373c93-80ae-49a0-93e1-642d9e1b4943	Artificial Inteligence
+1fbb285b-a3b8-43c8-8985-7483bd92c184	Programming Architecture
 \.
 
 
 --
--- TOC entry 4897 (class 0 OID 33786)
+-- TOC entry 4897 (class 0 OID 34282)
 -- Dependencies: 220
 -- Data for Name: room; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.room (uuid, building_uuid, name) FROM stdin;
-ec1e562b-64fa-4082-a2b0-9db5bd30816b	8003aa6e-8411-4adc-a218-c9df6235a309	208
-fd0d4542-6518-4b08-aecc-ce769db3822d	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	106
-dead6d1d-6a74-47b9-91fe-f1569ad40c13	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	119
-27aa3bd5-630a-4199-b649-4566dd683c53	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	105
-882c26b4-78e1-409e-8e1e-2221918c32b4	8003aa6e-8411-4adc-a218-c9df6235a309	105
-e3e52821-4e17-46b0-851e-d01d0923f93b	8003aa6e-8411-4adc-a218-c9df6235a309	103
-0975873c-d93f-4be4-a33e-5c28511f6078	8003aa6e-8411-4adc-a218-c9df6235a309	102
-087b75d9-df4c-4e40-aad6-b474f6d3fa44	8003aa6e-8411-4adc-a218-c9df6235a309	101
-0339855b-4fdf-4b50-9a3c-3d057d574e5c	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	120
-1675d9ca-9f12-4c87-82d7-b018a9e1ac19	8003aa6e-8411-4adc-a218-c9df6235a309	305
-f1a4bd1c-5592-457b-91ed-08358e4d042d	aee7c8ca-1ac8-4ef2-a33d-fe93b6cb7705	205
-66f355de-985c-4537-96b2-7503578147ca	aee7c8ca-1ac8-4ef2-a33d-fe93b6cb7705	112
-ce7c1b5a-f3a1-4d2b-bafd-ab4b2edc403e	aee7c8ca-1ac8-4ef2-a33d-fe93b6cb7705	108
-6c380377-12e8-4de2-ae71-01e445da5a47	8003aa6e-8411-4adc-a218-c9df6235a309	201
-afd955a3-6149-4023-b3d2-9d01f893940a	a1a5dc14-79d7-48ce-baf8-2e8d2ea97394	401
-584b1ac8-06f5-48e6-aa51-166edfca50bc	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	108
-82a5b612-d5e6-4006-b8f2-38ed34b45b02	8003aa6e-8411-4adc-a218-c9df6235a309	209
-bc8799ae-cdfc-4197-bc25-2a400007c08b	8003aa6e-8411-4adc-a218-c9df6235a309	206
-d9e8bd2a-a1e7-4284-9e6c-e9958d8d64e4	f69e0d5c-8a58-443c-b4f2-a4ebdbd30582	905
-83a5fb28-fef9-4837-9d3e-fa0ff1e996fa	8003aa6e-8411-4adc-a218-c9df6235a309	206/201
-5ea6b204-fdf5-483f-a6c7-5c7b6f740499	8003aa6e-8411-4adc-a218-c9df6235a309	304
+a6d1afd6-977e-41bd-899f-5ed2dfcee4f8	58b215ad-708d-41a9-ab2a-007693f4970a	208
+0397c2da-d5ac-4f94-b491-f79fac5dec2f	58439e57-8a29-4ae4-bd2a-644a8041fc49	106
+8704ced8-3870-4701-ad99-5ef0dbfa0603	58439e57-8a29-4ae4-bd2a-644a8041fc49	119
+effd6097-ec9f-4335-9896-5304f0143993	58439e57-8a29-4ae4-bd2a-644a8041fc49	105
+d74d1abe-0243-4234-aca3-07816a5b242e	58b215ad-708d-41a9-ab2a-007693f4970a	105
+4455c1f6-8af7-41e4-9aba-0b23180d1378	58b215ad-708d-41a9-ab2a-007693f4970a	103
+2a0cef64-9eb8-49ff-938e-59440d530304	58b215ad-708d-41a9-ab2a-007693f4970a	102
+68d896c7-6b69-4635-9517-18974f69945a	58b215ad-708d-41a9-ab2a-007693f4970a	101
+ac7f43a7-e964-41db-92b3-834b690c6d44	58439e57-8a29-4ae4-bd2a-644a8041fc49	120
+0e5c070a-3db4-484d-8a17-c90cbc886000	58b215ad-708d-41a9-ab2a-007693f4970a	305
+3cd3292c-f156-4c81-9b65-887568855fb9	646b0369-464c-49c1-bb53-ebc6cfd72b0b	205
+2ee06dfa-4b46-4c4d-95c1-2212eb993993	646b0369-464c-49c1-bb53-ebc6cfd72b0b	112
+8927422c-9db6-43bb-ab93-ad263220b02f	646b0369-464c-49c1-bb53-ebc6cfd72b0b	108
+0ac77ba7-3b21-40c3-b134-fad2ac8e510e	58b215ad-708d-41a9-ab2a-007693f4970a	201
+64ac5087-13de-4858-a532-36cbb8c5d334	108e1304-38e3-4419-b1de-a132480763fa	401
+11b39e59-639a-4051-b768-55a502f24f67	58439e57-8a29-4ae4-bd2a-644a8041fc49	108
+bb21757a-a2cd-4b0c-82d3-cd1bc04c2461	58b215ad-708d-41a9-ab2a-007693f4970a	209
+cae26c7e-ea27-414c-aedc-e0075c49ef51	58b215ad-708d-41a9-ab2a-007693f4970a	206
+8547b43a-007e-40f4-893d-895718456668	58439e57-8a29-4ae4-bd2a-644a8041fc49	905
+53326c78-e0d7-4d33-839c-fd48df4944ae	58b215ad-708d-41a9-ab2a-007693f4970a	106/208
+6a03ff90-f8eb-46b7-935f-7dc05a2669f8	58b215ad-708d-41a9-ab2a-007693f4970a	304
 \.
 
 
 --
--- TOC entry 4898 (class 0 OID 33798)
+-- TOC entry 4898 (class 0 OID 34294)
 -- Dependencies: 221
 -- Data for Name: student; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.student (uuid, first_name, last_name, email, group_uuid) FROM stdin;
-285440b9-f89b-4497-b8bf-3cc661a2008c	Arsen	Grigoryan	arsen.grigoryan555@gmail.com	135cc20b-58af-447b-a25f-10201326c4ba
-e47ec487-cd91-4dcd-9309-f53304230076	Niko	Isaxanyan	niko.isaxanyan@gmail.com	92cc84f2-3149-463e-8a87-7f47ca6fc7ad
+01b70e22-0fb3-4bec-8d9d-f93372cfd1d2	Arsen	Grigoryan	arsen.grigoryan555@gmail.com	4e6b443e-be3b-456d-aa7f-6ba55e4d7c61
+25e3da89-8d16-4108-bff0-e1f25935b9f4	Niko	Isaxanyan	niko.isaxanyan@gmail.com	12e73255-9673-48ac-9960-efcfe47a0563
 \.
 
 
 --
--- TOC entry 4900 (class 0 OID 33827)
+-- TOC entry 4900 (class 0 OID 34323)
 -- Dependencies: 223
 -- Data for Name: teacher; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.teacher (uuid, first_name_en, last_name_en, first_name_hy, last_name_hy, first_name_ru, last_name_ru, department_uuid) FROM stdin;
-e05a1753-5887-4a93-950b-5f9bec6ed52f	S	Episkoposyan	Ս	Եպիսկոպոսյան	С	Епископосян	09373d78-ce5c-47f8-b89b-0300b6eaa428
-006270d8-7733-49d1-8e28-8c2a3261d809	N	Sahakyan	Ն	Սահակյան	Н	Саакян	f7440f4c-21bf-4652-aad0-98501930ee7b
-912d51e4-baba-4ace-8c07-dc0c8181f725	S	Hayrapetyan	Ս	Հայրապետյան	С	Гайрапетян	09373d78-ce5c-47f8-b89b-0300b6eaa428
-5588b7d4-4eea-4059-a444-f45a202df4ec	N	Badalyan	Ն	Բադալան	Н	Бадалян	09373d78-ce5c-47f8-b89b-0300b6eaa428
-2982e205-0322-408a-a72a-cf598dc76b8a	V	Saroyan	Վ	Սարոյան	В	Сароян	4c22473e-4d1c-436f-b10d-0c3f2ec70780
-2e510a4e-3b76-451c-a74f-07b539a15437	P	Hakobyan	Պ	Հակոբյան	П	Хакопян	09373d78-ce5c-47f8-b89b-0300b6eaa428
-f6f21636-a993-4e6a-b760-b9f53d070725	J	Srapionyan	Ջ	Սրապիոնյան	Д	Срапионян	09373d78-ce5c-47f8-b89b-0300b6eaa428
-6988a51d-209b-4d91-a99d-26fcdb74d0e4	G	Zaprosyan	Գ	Զապրոսյան	Г	Запросян	47361c69-8535-4f7f-95bc-9f19ee68ac7b
-fbd6e8e0-1e48-45a3-b26e-563f392a72ca	S	Meliqyan	Ս	Մելիքյան	С	Меликян	47361c69-8535-4f7f-95bc-9f19ee68ac7b
-81beaa17-aa15-4c05-82d3-ceefba5fef07	I	Saghatelyan	Ի	Սաղաթելայան	И	Сахателян	47361c69-8535-4f7f-95bc-9f19ee68ac7b
-b0067bbe-355a-4d0c-a1bc-4398457b2905	N	Baxdasaryan	Ն	Բաղդասարյան	Н	Бахдасарян	c31726ba-ed3c-4173-b250-5e47cb05b3f0
-6e157099-e7ea-4cca-97d5-86bf18fb6a7d	S	Khachatryan	Ս	Խաչատրյան	С	Хачатрян	09373d78-ce5c-47f8-b89b-0300b6eaa428
-bf3068ad-bfc7-419b-ae92-4e6930b44d2d	M	Haykazyan	Մ	Հայկազյան	М	Хайказян	09373d78-ce5c-47f8-b89b-0300b6eaa428
-481b3111-46fd-4d00-ac75-d8b5ab366902	I	Hovhannisyan	Ի	Հովհաննիսյան	И	Оганисян	09373d78-ce5c-47f8-b89b-0300b6eaa428
+ea05bce7-9ca8-4374-a081-51f0292a00eb	S	Episkoposyan	Ս	Եպիսկոպոսյան	С	Епископосян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
+a6b375a2-3915-4ab3-a17e-cb3c7c987b5f	N	Sahakyan	Ն	Սահակյան	Н	Саакян	957ad9d5-4e94-4649-a301-194ea863e878
+367f66d7-a457-4191-a3d3-f952822fea0d	S	Hayrapetyan	Ս	Հայրապետյան	С	Гайрапетян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
+b3608d87-4bc1-4928-97f2-314278853177	N	Badalyan	Ն	Բադալան	Н	Бадалян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
+1cd3788c-a6f1-4405-8527-aa7a979867c1	V	Saroyan	Վ	Սարոյան	В	Сароян	1877435f-488e-4d8d-9b88-6ec1b99b29fd
+85cbdc60-9500-4c90-abb4-e8e50541848d	P	Hakobyan	Պ	Հակոբյան	П	Хакопян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
+4fba504a-3b3c-4b50-bf4b-14d65ec79357	J	Srapionyan	Ջ	Սրապիոնյան	Д	Срапионян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
+ad501b23-8d32-4165-b327-c30188e55de0	G	Zaprosyan	Գ	Զապրոսյան	Г	Запросян	4e494530-66bb-43c9-a0c3-5de48e6be0b5
+6bce83ae-4a33-4bee-9973-0708ae9e4165	S	Meliqyan	Ս	Մելիքյան	С	Меликян	4e494530-66bb-43c9-a0c3-5de48e6be0b5
+8af5859f-093e-416d-bb3d-10505fe0cf2c	I	Saghatelyan	Ի	Սաղաթելայան	И	Сахателян	4e494530-66bb-43c9-a0c3-5de48e6be0b5
+fa57cd4b-3bf1-4219-a575-0beca831ba73	N	Baxdasaryan	Ն	Բաղդասարյան	Н	Бахдасарян	032e1d7f-3e23-491d-bdfe-9a0ca753df5b
+4c6d7168-01ce-4b78-bf6c-5f492672a4be	S	Khachatryan	Ս	Խաչատրյան	С	Хачатрян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
+08e9e068-6b00-43b0-8b10-1fdc43fa9c30	A	Qamalyan	Ա	Քամալյան	А	Камалян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
+d2e9836e-4572-4bee-af7e-000be864282b	I	Hovhannisyan	Ի	Հովհաննիսյան	И	Оганисян	3d1d9d6d-f3e0-4d05-ba66-45e52b8f1bc3
 \.
 
 
 --
--- TOC entry 4723 (class 2606 OID 33761)
+-- TOC entry 4723 (class 2606 OID 34257)
 -- Name: building building_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -410,7 +411,7 @@ ALTER TABLE ONLY public.building
 
 
 --
--- TOC entry 4737 (class 2606 OID 33845)
+-- TOC entry 4737 (class 2606 OID 34341)
 -- Name: course course_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -419,7 +420,7 @@ ALTER TABLE ONLY public.course
 
 
 --
--- TOC entry 4733 (class 2606 OID 33816)
+-- TOC entry 4733 (class 2606 OID 34312)
 -- Name: department department_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -428,7 +429,7 @@ ALTER TABLE ONLY public.department
 
 
 --
--- TOC entry 4725 (class 2606 OID 33768)
+-- TOC entry 4725 (class 2606 OID 34264)
 -- Name: group group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -437,7 +438,7 @@ ALTER TABLE ONLY public."group"
 
 
 --
--- TOC entry 4727 (class 2606 OID 33780)
+-- TOC entry 4727 (class 2606 OID 34276)
 -- Name: lab lab_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -446,7 +447,7 @@ ALTER TABLE ONLY public.lab
 
 
 --
--- TOC entry 4721 (class 2606 OID 33754)
+-- TOC entry 4721 (class 2606 OID 34250)
 -- Name: major major_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -455,7 +456,7 @@ ALTER TABLE ONLY public.major
 
 
 --
--- TOC entry 4729 (class 2606 OID 33792)
+-- TOC entry 4729 (class 2606 OID 34288)
 -- Name: room room_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -464,7 +465,7 @@ ALTER TABLE ONLY public.room
 
 
 --
--- TOC entry 4731 (class 2606 OID 33804)
+-- TOC entry 4731 (class 2606 OID 34300)
 -- Name: student student_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -473,7 +474,7 @@ ALTER TABLE ONLY public.student
 
 
 --
--- TOC entry 4735 (class 2606 OID 33833)
+-- TOC entry 4735 (class 2606 OID 34329)
 -- Name: teacher teacher_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -482,7 +483,7 @@ ALTER TABLE ONLY public.teacher
 
 
 --
--- TOC entry 4745 (class 2606 OID 33851)
+-- TOC entry 4745 (class 2606 OID 34347)
 -- Name: course course_building_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -491,7 +492,7 @@ ALTER TABLE ONLY public.course
 
 
 --
--- TOC entry 4746 (class 2606 OID 33861)
+-- TOC entry 4746 (class 2606 OID 34357)
 -- Name: course course_group_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -500,7 +501,7 @@ ALTER TABLE ONLY public.course
 
 
 --
--- TOC entry 4747 (class 2606 OID 33866)
+-- TOC entry 4747 (class 2606 OID 34362)
 -- Name: course course_lab_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -509,7 +510,7 @@ ALTER TABLE ONLY public.course
 
 
 --
--- TOC entry 4748 (class 2606 OID 33846)
+-- TOC entry 4748 (class 2606 OID 34342)
 -- Name: course course_room_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -518,7 +519,7 @@ ALTER TABLE ONLY public.course
 
 
 --
--- TOC entry 4749 (class 2606 OID 33856)
+-- TOC entry 4749 (class 2606 OID 34352)
 -- Name: course course_teacher_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -527,7 +528,7 @@ ALTER TABLE ONLY public.course
 
 
 --
--- TOC entry 4742 (class 2606 OID 33822)
+-- TOC entry 4742 (class 2606 OID 34318)
 -- Name: department department_building_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -536,7 +537,7 @@ ALTER TABLE ONLY public.department
 
 
 --
--- TOC entry 4743 (class 2606 OID 33817)
+-- TOC entry 4743 (class 2606 OID 34313)
 -- Name: department department_room_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -545,7 +546,7 @@ ALTER TABLE ONLY public.department
 
 
 --
--- TOC entry 4738 (class 2606 OID 33769)
+-- TOC entry 4738 (class 2606 OID 34265)
 -- Name: group group_major_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -554,7 +555,7 @@ ALTER TABLE ONLY public."group"
 
 
 --
--- TOC entry 4739 (class 2606 OID 33781)
+-- TOC entry 4739 (class 2606 OID 34277)
 -- Name: lab lab_major_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -563,7 +564,7 @@ ALTER TABLE ONLY public.lab
 
 
 --
--- TOC entry 4740 (class 2606 OID 33793)
+-- TOC entry 4740 (class 2606 OID 34289)
 -- Name: room room_building_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -572,7 +573,7 @@ ALTER TABLE ONLY public.room
 
 
 --
--- TOC entry 4741 (class 2606 OID 33805)
+-- TOC entry 4741 (class 2606 OID 34301)
 -- Name: student student_group_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -581,7 +582,7 @@ ALTER TABLE ONLY public.student
 
 
 --
--- TOC entry 4744 (class 2606 OID 33834)
+-- TOC entry 4744 (class 2606 OID 34330)
 -- Name: teacher teacher_department_uuid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -589,9 +590,8 @@ ALTER TABLE ONLY public.teacher
     ADD CONSTRAINT teacher_department_uuid_fkey FOREIGN KEY (department_uuid) REFERENCES public.department(uuid);
 
 
--- Completed on 2024-10-01 02:54:53
+-- Completed on 2024-10-16 02:44:41
 
 --
 -- PostgreSQL database dump complete
 --
-

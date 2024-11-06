@@ -6,7 +6,7 @@ from core.models import db_helper
 
 router = APIRouter(tags=["Status"])
 
-@router.get("/", response_model=Status)
+@router.head("/", response_model=Status)
 async def status(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
