@@ -47,7 +47,7 @@ jobs:
       uses: cssnr/stack-deploy-action@v1
       with:
         name: uschedule
-        file: docker-stack.yaml
+        file: docker-stack.yml
         host: schedule.arsgreg.com
         user: deploy
         ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
