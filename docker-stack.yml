@@ -21,7 +21,7 @@ services:
       - uschedule-net
 
   backend:
-    image: ghcr.io/arsen2019/uschedule:latest
+    image: ghcr.io/arsen2019/uschedule:${GIT_COMMIT_HASH:-latest}
     depends_on:
       - db
     deploy:
