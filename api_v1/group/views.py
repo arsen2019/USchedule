@@ -9,7 +9,7 @@ from core.models import db_helper
 router = APIRouter(tags=["Group-Labs"])
 
 
-@router.get("/", response_model=list[Group] | str)
+@router.get("/", response_model=list[Group])
 async def get_groups(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
