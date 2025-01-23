@@ -13,7 +13,7 @@ async def get_group(session: AsyncSession):
     if not group:
         raise HTTPException(status_code=404, detail="group not found")
 
-    return group
+    return "Davit is the best"
 
 async def get_lab(session: AsyncSession):
     stmt = select(Lab)
