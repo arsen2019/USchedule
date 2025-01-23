@@ -12,9 +12,8 @@ async def get_group(session: AsyncSession):
 
     if not group:
         raise HTTPException(status_code=404, detail="group not found")
-
-    return group
     print("Davo is the best")
+    return group
 
 async def get_lab(session: AsyncSession):
     stmt = select(Lab)
