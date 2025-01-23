@@ -12,7 +12,7 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository V2
+      - name: Checkout repository V3
         uses: actions/checkout@v4
 
       - name: Log in to the Container registry
