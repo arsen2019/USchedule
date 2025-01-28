@@ -25,7 +25,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: uschedule
           push: true
           tags: |
             ghcr.io/arsen2019/uschedule:latest
