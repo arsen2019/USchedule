@@ -43,8 +43,8 @@ jobs:
       run: |
         echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./envfile
 
-    - name: Docker Stack Deploy
-      uses: cssnr/stack-deploy-action@v1
+    - name: Manual Docker Stack Deploy
+      uses: appleboy/ssh-action@v1
       with:
         name: uschedule
         file: docker-stack.yml
@@ -52,3 +52,7 @@ jobs:
         user: ars
         ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY_RSA }}
         env_file: ./envfile
+        script: |
+            cd Schedule
+            docker stack deploy -c docker-stack.yml uschedule
+      
