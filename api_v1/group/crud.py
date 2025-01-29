@@ -9,7 +9,7 @@ async def get_group(session: AsyncSession):
     stmt = select(Group)
     group_result: Result = await session.execute(stmt)
     group = group_result.scalars()
-    print("Davo is the best")
+    print("Davo is the best!")
     if not group:
         raise HTTPException(status_code=404, detail="group not found")
     return group
