@@ -49,8 +49,8 @@ jobs:
         name: uschedule
         file: docker-stack.yml
         host: schedule.arsgreg.com
-        user: ars
-        ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY_RSA }}
+        username: ars
+        key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY_RSA }}
         env_file: ./envfile
         script: |
             cd Schedule
