@@ -26,8 +26,6 @@ services:
   backend:
     build:
       dockerfile: Dockerfile
-      args:
-        DB_PASSWORD_FILE: ${DB_PASSWORD}
     container_name: uschedule-backend
     ports:
       - "8000:8000"
