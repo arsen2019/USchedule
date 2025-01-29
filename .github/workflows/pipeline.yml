@@ -44,7 +44,7 @@ jobs:
         echo "GIT_COMMIT_HASH=${{ github.sha }}" >> ./envfile
 
     - name: Manual Docker Stack Deploy
-      uses: appleboy/ssh-action@v1
+      uses: appleboy/ssh-action@v1.2.0
       with:
         name: uschedule
         file: docker-stack.yml
