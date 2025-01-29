@@ -52,5 +52,3 @@ jobs:
         user: ars
         ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY_RSA }}
         env_file: ./envfile
-        pre_commands: |
-          echo "${{ secrets.PAT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
