@@ -1,9 +1,8 @@
 name: pipeline
 on:
  push:
-   branches:
-     - "main"
-     - "docker-stack"
+   tags:
+     - "v*"
 
 permissions:
   packages: write
