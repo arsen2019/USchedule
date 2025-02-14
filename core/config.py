@@ -7,7 +7,7 @@ load_dotenv()
 
 class Settings(BaseSettings):
     api_v1_prefix: str = ""
-    db_url: str = os.getenv("DB_URL")
+    db_url: str = "postgresql+asyncpg://postgres:Postgresql123!@db:5432/postgres"
     db_echo: bool = True
 
 
