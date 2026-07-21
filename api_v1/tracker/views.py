@@ -47,10 +47,20 @@ async def get_admin_user_records(
 @router.get("/by-username/{username}/records", response_model=list[DayRecord])
 async def get_tracker_records(
     username: str,
-    x_tracker_token: str = Header(...),
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    return await crud.get_records_by_username(session, username, x_tracker_token)
+    user = await crud.get_or_create_by_username(session, username)
+    await session.commit()
+    return await crud.records_for_user(session, user)
+
+
+@router.put("/by-username/{username}/sync", response_model=SyncResponse)
+async def sync_tracker_by_username(
+    username: str,
+    payload: SyncRequest,
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    return await crud.sync_by_username(session, username, payload)
 
 
 @router.put("/{tracker_id}/sync", response_model=SyncResponse)

@@ -19,13 +19,13 @@ from core.models.base import Base
 Base.metadata.clear()
 
 class TrackerUser(Base):
-    """A private tracker profile owned by one browser installation."""
+    """A tracker profile identified by its normalized unique username."""
 
     __tablename__ = "tracker_user"
 
-    uuid = Column(UUID(as_uuid=True), primary_key=True)
+    uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     username = Column(String(64), nullable=True, unique=True, index=True)
-    token_hash = Column(String(64), nullable=False)
+    token_hash = Column(String(64), nullable=True)
     initial_import_completed_at = Column(DateTime(timezone=True), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 

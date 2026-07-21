@@ -5,6 +5,7 @@ from fastapi import HTTPException
 from api_v1.tracker.schemas import DayRecord
 from api_v1.tracker.views import verify_admin_token
 from core.config import settings
+from core.models import TrackerUser
 
 
 class TrackerAdminAuthorizationTests(unittest.TestCase):
@@ -44,6 +45,10 @@ class TrackerAdminSchemaTests(unittest.TestCase):
             "values": {"09:00": 6.1, "14:00": None, "19:00": 7.2, "22:00": None},
         })
         self.assertIsNone(record.values.by_slot()["14:00"])
+
+    def test_username_profiles_no_longer_require_browser_tokens(self):
+        column = TrackerUser.__table__.c.token_hash
+        self.assertTrue(column.nullable)
 
 
 if __name__ == "__main__":

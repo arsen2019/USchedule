@@ -102,6 +102,49 @@ async def get_records_by_username(session: AsyncSession, username: str, token: s
     return await records_for_user(session, user)
 
 
+async def get_or_create_by_username(session: AsyncSession, username: str) -> TrackerUser:
+    normalized_username = username.strip().casefold()
+    if len(normalized_username) < 2 or len(normalized_username) > 64 or any(
+        character.isspace() for character in normalized_username
+    ):
+        raise HTTPException(status_code=422, detail="Invalid username")
+    result = await session.execute(
+        select(TrackerUser).where(TrackerUser.username == normalized_username)
+    )
+    user = result.scalar_one_or_none()
+    if user is None:
+        user = TrackerUser(username=normalized_username, token_hash=None)
+        session.add(user)
+        await session.flush()
+    return user
+
+
+async def sync_by_username(session: AsyncSession, username: str, payload: SyncRequest):
+    normalized_username = username.strip().casefold()
+    if payload.username != normalized_username:
+        raise HTTPException(status_code=422, detail="Path and payload usernames must match")
+    user = await get_or_create_by_username(session, normalized_username)
+    imported_count = 0
+    for record in payload.records:
+        for time_slot, value in record.values.by_slot().items():
+            statement = insert(GlucoseRecord).values(
+                tracker_user_uuid=user.uuid, day=record.day, time_slot=time_slot, value=value
+            ).on_conflict_do_update(
+                constraint="uq_glucose_user_day_slot",
+                set_={"value": value, "updated_at": datetime.now(timezone.utc)},
+            )
+            await session.execute(statement)
+            imported_count += 1
+    if payload.initial_import and user.initial_import_completed_at is None:
+        user.initial_import_completed_at = datetime.now(timezone.utc)
+    await session.commit()
+    return {
+        "records": await records_for_user(session, user),
+        "initial_import_completed": user.initial_import_completed_at is not None,
+        "imported_count": imported_count,
+    }
+
+
 async def authenticate_or_create(
     session: AsyncSession, tracker_id: UUID, username: str, token: str
 ) -> TrackerUser:

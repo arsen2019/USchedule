@@ -13,7 +13,9 @@ services:
       - postgres-data:/var/lib/postgresql/data
     deploy:
       update_config:
-        order: start-first
+        # PostgreSQL is a single writer using one persistent local volume.
+        # Never overlap old and new database tasks during an update.
+        order: stop-first
       replicas: 1
       restart_policy:
         condition: on-failure

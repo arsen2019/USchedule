@@ -38,6 +38,7 @@ async def lifespan(app: FastAPI):
         # create_all does not alter tables created by an earlier local version.
         await conn.execute(text("ALTER TABLE tracker_user ADD COLUMN IF NOT EXISTS username VARCHAR(64)"))
         await conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_tracker_user_username ON tracker_user (username) WHERE username IS NOT NULL"))
+        await conn.execute(text("ALTER TABLE tracker_user ALTER COLUMN token_hash DROP NOT NULL"))
         await conn.execute(text("ALTER TABLE glucose_record ALTER COLUMN value DROP NOT NULL"))
     yield
 
