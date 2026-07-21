@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     api_v1_prefix: str = ""
     db_url: str = "postgresql+asyncpg://postgres:Postgresql123!@db:5432/postgres"
     db_echo: bool = True
+    tracker_admin_token: str | None = None
 
 
 settings = Settings()

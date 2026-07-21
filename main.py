@@ -4,6 +4,7 @@ from core.models import Base, db_helper
 from api_v1 import router_for_course as router_v1
 from api_v1 import router_for_group as router_v2
 from api_v1 import router_for_status as router_v3
+from api_v1 import router_for_tracker as router_v4
 from core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -11,6 +12,7 @@ import sentry_sdk
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.responses import JSONResponse
+from sqlalchemy import text
 
 sentry_sdk.init(
     dsn="https://29a0a60f5d2603e9da0f377a61234d81@o4508167457603584.ingest.de.sentry.io/4508167628652624",
@@ -33,6 +35,10 @@ origins = [
 async def lifespan(app: FastAPI):
     async with db_helper.engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+        # create_all does not alter tables created by an earlier local version.
+        await conn.execute(text("ALTER TABLE tracker_user ADD COLUMN IF NOT EXISTS username VARCHAR(64)"))
+        await conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_tracker_user_username ON tracker_user (username) WHERE username IS NOT NULL"))
+        await conn.execute(text("ALTER TABLE glucose_record ALTER COLUMN value DROP NOT NULL"))
     yield
 
 app = FastAPI(lifespan=lifespan)
@@ -64,6 +70,7 @@ app.add_middleware(
 app.include_router(router=router_v1, prefix=settings.api_v1_prefix)
 app.include_router(router=router_v2, prefix=settings.api_v1_prefix)
 app.include_router(router=router_v3, prefix=settings.api_v1_prefix)
+app.include_router(router=router_v4, prefix=settings.api_v1_prefix)
 
 
 if __name__ == "__main__":

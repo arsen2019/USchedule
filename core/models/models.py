@@ -9,12 +9,41 @@ from sqlalchemy import (
     Double,
     UUID,
     func,
+    Date,
+    DateTime,
+    UniqueConstraint,
 )
 from sqlalchemy.orm import relationship, sessionmaker, declarative_base, class_mapper
 from core.models.base import Base
 
 Base.metadata.clear()
-print(len(Base.metadata.tables.items()))
+
+class TrackerUser(Base):
+    """A private tracker profile owned by one browser installation."""
+
+    __tablename__ = "tracker_user"
+
+    uuid = Column(UUID(as_uuid=True), primary_key=True)
+    username = Column(String(64), nullable=True, unique=True, index=True)
+    token_hash = Column(String(64), nullable=False)
+    initial_import_completed_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
+class GlucoseRecord(Base):
+    __tablename__ = "glucose_record"
+
+    __table_args__ = (
+        UniqueConstraint("tracker_user_uuid", "day", "time_slot", name="uq_glucose_user_day_slot"),
+    )
+
+    uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    tracker_user_uuid = Column(UUID(as_uuid=True), ForeignKey("tracker_user.uuid", ondelete="CASCADE"), nullable=False, index=True)
+    day = Column(Date, nullable=False, index=True)
+    time_slot = Column(String(5), nullable=False)
+    value = Column(Double, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
 
 class Student(Base):
 

@@ -9,10 +9,12 @@ __all__ = (
     "Lab",
     "Student",
     "Course",
+    "TrackerUser",
+    "GlucoseRecord",
     "DatabaseHelper",
     "db_helper",
 )
 
 from .base import Base
 from .db_helper import db_helper, DatabaseHelper
-from .models import Teacher, Building, Room, Department, Major, Group, Student, Course, Lab
+from .models import Teacher, Building, Room, Department, Major, Group, Student, Course, Lab, TrackerUser, GlucoseRecord
