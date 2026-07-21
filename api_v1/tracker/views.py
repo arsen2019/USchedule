@@ -2,13 +2,13 @@ from datetime import date
 from hmac import compare_digest
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Header, HTTPException, Query
+from fastapi import APIRouter, Depends, Header, HTTPException, Query, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.config import settings
 from core.models import db_helper
 from . import crud
-from .schemas import AdminTrackerUser, DayRecord, SyncRequest, SyncResponse
+from .schemas import AdminTrackerUser, DayRecord, DayValues, SyncRequest, SyncResponse
 
 router = APIRouter(tags=["Glucose tracker"])
 
@@ -42,6 +42,34 @@ async def get_admin_user_records(
     if date_from > date_to:
         raise HTTPException(status_code=422, detail="date_from must not be after date_to")
     return await crud.get_admin_records(session, username, date_from, date_to)
+
+
+@router.patch(
+    "/admin/users/{username}/records/{day}",
+    response_model=DayRecord,
+    dependencies=[Depends(verify_admin_token)],
+)
+async def patch_admin_user_record(
+    username: str,
+    day: date,
+    values: DayValues,
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    return await crud.admin_upsert_day(session, username, day, values)
+
+
+@router.delete(
+    "/admin/users/{username}/records/{day}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    dependencies=[Depends(verify_admin_token)],
+)
+async def delete_admin_user_record(
+    username: str,
+    day: date,
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    await crud.admin_delete_day(session, username, day)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @router.get("/by-username/{username}/records", response_model=list[DayRecord])

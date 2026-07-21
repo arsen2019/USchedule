@@ -4,7 +4,7 @@ from hmac import compare_digest
 from uuid import UUID
 
 from fastapi import HTTPException
-from sqlalchemy import case, func, select
+from sqlalchemy import case, delete, func, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -87,6 +87,37 @@ async def get_admin_records(session: AsyncSession, username: str, date_from, dat
     if user is None:
         raise HTTPException(status_code=404, detail="Tracker user not found")
     return await records_for_user(session, user, date_from, date_to, ascending=True)
+
+
+async def admin_upsert_day(session: AsyncSession, username: str, day, values):
+    user = await get_or_create_by_username(session, username)
+    for time_slot, value in values.by_slot().items():
+        statement = insert(GlucoseRecord).values(
+            tracker_user_uuid=user.uuid, day=day, time_slot=time_slot, value=value
+        ).on_conflict_do_update(
+            constraint="uq_glucose_user_day_slot",
+            set_={"value": value, "updated_at": datetime.now(timezone.utc)},
+        )
+        await session.execute(statement)
+    await session.commit()
+    return {"day": day, "values": values.by_slot()}
+
+
+async def admin_delete_day(session: AsyncSession, username: str, day):
+    normalized_username = username.strip().casefold()
+    result = await session.execute(
+        select(TrackerUser).where(TrackerUser.username == normalized_username)
+    )
+    user = result.scalar_one_or_none()
+    if user is None:
+        raise HTTPException(status_code=404, detail="Tracker user not found")
+    await session.execute(
+        delete(GlucoseRecord).where(
+            GlucoseRecord.tracker_user_uuid == user.uuid,
+            GlucoseRecord.day == day,
+        )
+    )
+    await session.commit()
 
 
 async def get_records_by_username(session: AsyncSession, username: str, token: str):
