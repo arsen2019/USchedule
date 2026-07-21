@@ -22,6 +22,8 @@ services:
 
   backend:
     image: ghcr.io/arsen2019/uschedule:${GIT_COMMIT_HASH:-latest}
+    environment:
+      - TRACKER_ADMIN_TOKEN=${TRACKER_ADMIN_TOKEN}
     depends_on:
       - db
     deploy:
