@@ -52,3 +52,7 @@ jobs:
         user: ars
         ssh_key: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY_RSA }}
         env_file: ./envfile
+        detach: false
+        registry_host: ghcr.io
+        registry_user: ${{ github.actor }}
+        registry_pass: ${{ secrets.PAT_TOKEN }}

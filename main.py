@@ -1,5 +1,7 @@
+import asyncio
+import logging
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request, status
 from core.models import Base, db_helper
 from api_v1 import router_for_course as router_v1
 from api_v1 import router_for_group as router_v2
@@ -16,11 +18,10 @@ from sqlalchemy import text
 
 sentry_sdk.init(
     dsn="https://29a0a60f5d2603e9da0f377a61234d81@o4508167457603584.ingest.de.sentry.io/4508167628652624",
-    traces_sample_rate=1.0,
-    _experiments={
-        "continuous_profiling_auto_start": True,
-    },
+    traces_sample_rate=0.1,
 )
+
+logger = logging.getLogger("uschedule")
 
 origins = [
     "https://schedule.arsgreg.com",
@@ -33,18 +34,48 @@ origins = [
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    async with db_helper.engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-        # create_all does not alter tables created by an earlier local version.
-        await conn.execute(text("ALTER TABLE tracker_user ADD COLUMN IF NOT EXISTS username VARCHAR(64)"))
-        await conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_tracker_user_username ON tracker_user (username) WHERE username IS NOT NULL"))
-        await conn.execute(text("ALTER TABLE tracker_user ALTER COLUMN token_hash DROP NOT NULL"))
-        await conn.execute(text("ALTER TABLE glucose_record ALTER COLUMN value DROP NOT NULL"))
-    yield
+    for attempt in range(1, 16):
+        try:
+            async with db_helper.engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+                # create_all does not alter tables created by an earlier local version.
+                await conn.execute(text("ALTER TABLE tracker_user ADD COLUMN IF NOT EXISTS username VARCHAR(64)"))
+                await conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_tracker_user_username ON tracker_user (username) WHERE username IS NOT NULL"))
+                await conn.execute(text("ALTER TABLE tracker_user ALTER COLUMN token_hash DROP NOT NULL"))
+                await conn.execute(text("ALTER TABLE glucose_record ALTER COLUMN value DROP NOT NULL"))
+            break
+        except Exception:
+            if attempt == 15:
+                logger.exception("Database remained unavailable during application startup")
+                raise
+            logger.warning("Database is not ready (attempt %s/15); retrying in 4 seconds", attempt)
+            await asyncio.sleep(4)
+    try:
+        yield
+    finally:
+        await db_helper.engine.dispose()
 
 app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(SentryAsgiMiddleware)
+
+
+@app.get("/health", include_in_schema=False)
+async def health():
+    return {"status": "ok"}
+
+
+@app.get("/ready", include_in_schema=False)
+async def ready():
+    try:
+        async with db_helper.engine.connect() as connection:
+            await connection.execute(text("SELECT 1"))
+    except Exception as error:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database is unavailable",
+        ) from error
+    return {"status": "ready"}
 
 @app.exception_handler(StarletteHTTPException)
 async def custom_http_exception_handler(request: Request, exc: StarletteHTTPException):
